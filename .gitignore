@@ -1,0 +1,10 @@
+# The Godot game project lives in its own repository
+# (github.com/hacktic-dev/dejinochi) and is not part of this site repo.
+dejinochi/
+dejinochi_sources/
+*.xlsx
+
+# OS cruft
+Thumbs.db
+.DS_Store
+desktop.ini

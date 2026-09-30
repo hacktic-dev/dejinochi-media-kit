@@ -1,0 +1,679 @@
+/* ==========================================================================
+   Dejinochi media kit
+   --------------------------------------------------------------------------
+   Contents
+   1.  Design tokens
+   2.  Base / reset
+   3.  Layout helpers
+   4.  Hero
+   5.  Quick facts
+   6.  Sections, About, Key features
+   7.  Trailer
+   8.  Screenshots + lightbox
+   9.  Media assets
+   10. Contact / social
+   11. Footer
+   12. Responsive
+   ========================================================================== */
+
+/* 1. Design tokens -------------------------------------------------------- */
+:root {
+  /* Surfaces: dark, slightly warm plum/navy */
+  --bg: #1a1521;
+  --panel: #221c2c;
+  --panel-hover: #281f34;
+  --border: #362c44;
+  --border-soft: #2b2337;
+
+  /* Text */
+  --text: #efe9f5;
+  --text-soft: #d9d0e4;
+  --text-muted: #a294b3;
+
+  /* Accents: soft pink, lavender, pale blue, muted LCD green */
+  --pink: #f0a7c6;
+  --pink-strong: #f7bcd5;
+  --lilac: #bfa8f0;
+  --blue: #a6cbf0;
+  --lcd: #a7b183;
+  --lcd-soft: #c2cba4;
+
+  /* Shape */
+  --radius: 14px;
+  --radius-sm: 10px;
+
+  /* Type
+     --font-pixel is the hook for a future pixel font: set it to something like
+     "Dejinochi Pixel", monospace; and it will be used only for small labels
+     (eyebrow text, quick-fact labels, kickers). */
+  --font-sans: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-pixel: var(--font-sans);
+
+  --wrap: 1080px;
+  --focus: 0 0 0 3px rgba(240, 167, 198, 0.45);
+}
+
+/* 2. Base / reset --------------------------------------------------------- */
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+@media (prefers-reduced-motion: no-preference) {
+  html { scroll-behavior: smooth; }
+}
+
+body {
+  margin: 0;
+  background-color: var(--bg);
+  color: var(--text);
+  font-family: var(--font-sans);
+  font-size: 17px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Very subtle warmth so the dark background is not flat. */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(820px 460px at 12% -8%, rgba(191, 168, 240, 0.10), transparent 68%),
+    radial-gradient(680px 420px at 100% 0%, rgba(240, 167, 198, 0.07), transparent 68%);
+}
+
+body > * { position: relative; z-index: 1; }
+
+body.is-locked { overflow: hidden; }
+
+img { max-width: 100%; height: auto; }
+
+a { color: inherit; }
+
+:focus-visible {
+  outline: none;
+  box-shadow: var(--focus);
+  border-radius: 6px;
+}
+
+.visually-hidden {
+  position: absolute !important;
+  width: 1px; height: 1px;
+  margin: -1px; padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+[hidden] { display: none !important; }
+
+.skip-link {
+  position: absolute;
+  left: 16px;
+  top: -60px;
+  z-index: 100;
+  padding: 0.6rem 1rem;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: top 0.15s ease;
+}
+.skip-link:focus { top: 16px; }
+
+/* 3. Layout helpers ------------------------------------------------------- */
+.wrap {
+  width: 100%;
+  max-width: var(--wrap);
+  margin-inline: auto;
+  padding-inline: clamp(20px, 5vw, 40px);
+}
+
+.eyebrow,
+.kicker {
+  margin: 0 0 0.75rem;
+  font-family: var(--font-pixel);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--lcd);
+}
+
+.kicker { margin-bottom: 0.4rem; }
+
+.section__title {
+  margin: 0 0 1.25rem;
+  font-size: clamp(1.3rem, 2.5vw, 1.65rem);
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+  font-weight: 650;
+}
+
+.prose {
+  margin: 0;
+  max-width: 62ch;
+  color: var(--text-soft);
+}
+.prose--tight { margin-bottom: 1.75rem; }
+
+.link {
+  color: var(--pink-strong);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(247, 188, 213, 0.35);
+  transition: border-color 0.15s ease, color 0.15s ease;
+}
+.link:hover { border-bottom-color: var(--pink-strong); }
+
+/* Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.72rem 1.35rem;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  font: inherit;
+  font-size: 0.95rem;
+  font-weight: 600;
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease, transform 0.15s ease;
+}
+
+.btn--primary {
+  background: var(--pink);
+  color: #2a1421;
+}
+.btn--primary:hover {
+  background: var(--pink-strong);
+  transform: translateY(-1px);
+}
+
+.btn--ghost {
+  border-color: var(--border);
+  color: var(--text);
+  background: rgba(255, 255, 255, 0.02);
+}
+.btn--ghost:hover {
+  border-color: var(--lilac);
+  transform: translateY(-1px);
+}
+
+.btn--small {
+  padding: 0.45rem 0.95rem;
+  font-size: 0.85rem;
+  border-color: var(--border);
+  color: var(--text);
+  background: rgba(255, 255, 255, 0.02);
+}
+.btn--small:hover { border-color: var(--pink); }
+
+/* 4. Hero ----------------------------------------------------------------- */
+.hero {
+  position: relative;
+  overflow: hidden;
+  padding-block: clamp(52px, 8vw, 104px) clamp(44px, 6vw, 76px);
+  border-bottom: 1px solid var(--border-soft);
+}
+
+.hero__inner { max-width: 620px; }
+
+/* Vertical capsule sits to the left of the game details once it has loaded.
+   script.js adds .hero--has-capsule, so a missing image simply leaves the
+   details on their own. */
+.hero__capsule { margin: 0 0 2rem; }
+.hero__capsule img {
+  display: block;
+  width: min(180px, 50vw);
+  height: auto;
+  border-radius: var(--radius);
+}
+
+/* The capsule stretches to the height of the details beside it. */
+@media (min-width: 760px) {
+  .hero--has-capsule .hero__inner {
+    display: grid;
+    grid-template-columns: minmax(0, 330px) minmax(0, 1fr);
+    gap: clamp(28px, 4vw, 48px);
+    align-items: stretch;
+    max-width: 960px;
+  }
+  .hero--has-capsule .hero__capsule { margin: 0; }
+  .hero--has-capsule .hero__capsule img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+}
+
+.hero__logo {
+  margin: 0 0 1.25rem;
+  line-height: 1;
+}
+.hero__logo img {
+  display: block;
+  width: min(420px, 68vw);
+  height: auto;
+  image-rendering: pixelated;
+}
+.hero__logo .wordmark {
+  display: inline-block;
+  font-family: var(--font-pixel);
+  font-size: clamp(2.1rem, 7vw, 3.2rem);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: var(--text);
+}
+
+.hero__pitch {
+  margin: 0 0 1rem;
+  max-width: 34ch;
+  font-size: clamp(1.15rem, 2.4vw, 1.45rem);
+  line-height: 1.4;
+  color: var(--text-soft);
+}
+
+.hero__meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem 1rem;
+  margin: 0 0 1.75rem;
+  padding: 0;
+  list-style: none;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
+.hero__meta li { display: flex; align-items: center; gap: 1rem; }
+.hero__meta li + li::before {
+  content: "";
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--lcd);
+  opacity: 0.7;
+}
+
+.hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+/* Decorative art: hidden if the file is missing (handled in script.js). */
+.hero__decor {
+  position: absolute;
+  pointer-events: none;
+  user-select: none;
+  image-rendering: pixelated;
+}
+.hero__decor--bg {
+  top: -40px;
+  right: -60px;
+  width: 420px;
+  opacity: 0.14;
+}
+.hero__decor--pet {
+  right: clamp(0px, 4vw, 72px);
+  bottom: 24px;
+  width: clamp(96px, 13vw, 156px);
+  opacity: 0.95;
+  display: none;
+}
+
+/* 5. Quick facts ---------------------------------------------------------- */
+.section--facts { padding-block: clamp(40px, 5vw, 60px); }
+
+.facts {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1px;
+  margin: 0;
+  padding: 0;
+  background: var(--border-soft);
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+.fact {
+  background: var(--panel);
+  padding: 1.05rem 1.25rem;
+}
+.fact dt {
+  font-family: var(--font-pixel);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+.fact dd {
+  margin: 0.35rem 0 0;
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.4;
+  color: var(--text);
+}
+
+/* 6. Sections / features -------------------------------------------------- */
+.section { padding-block: clamp(48px, 6.5vw, 84px); }
+.section + .section { border-top: 1px solid var(--border-soft); }
+
+.features {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 0.85rem 2.5rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.features li {
+  position: relative;
+  padding-left: 1.4rem;
+  color: var(--text-soft);
+  max-width: 46ch;
+}
+
+.features li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.62em;
+  width: 8px;
+  height: 8px;
+  border-radius: 2px;
+  background: var(--lilac);
+}
+.features li:nth-child(3n + 1)::before { background: var(--pink); }
+.features li:nth-child(3n + 2)::before { background: var(--lilac); }
+.features li:nth-child(3n + 3)::before { background: var(--blue); }
+
+/* 7. Trailer -------------------------------------------------------------- */
+.trailer {
+  position: relative;
+  width: 100%;
+  max-width: 720px;
+  aspect-ratio: 16 / 9;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: #120f16;
+}
+
+.trailer iframe {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+.trailer__note {
+  max-width: 720px;
+  margin: 0.9rem 0 0;
+  font-size: 0.9rem;
+}
+
+/* 8. Screenshots + lightbox ---------------------------------------------- */
+.shots {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 14px;
+}
+
+.shot { margin: 0; }
+
+.shot a {
+  display: block;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--panel);
+  transition: border-color 0.15s ease;
+}
+.shot a:hover { border-color: var(--pink); }
+
+.shot img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+.shot a:hover img { transform: scale(1.03); }
+
+/* Shown instead of a screenshot whose URL has not been supplied yet. */
+.shot__missing {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  aspect-ratio: 16 / 9;
+  border: 1px dashed var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--panel);
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  text-align: center;
+  padding: 1rem;
+}
+.shot__missing code {
+  font-size: 0.78rem;
+  color: var(--lcd-soft);
+}
+
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(16px, 4vw, 48px);
+  background: rgba(13, 10, 17, 0.93);
+}
+
+.lightbox__img {
+  max-width: 100%;
+  max-height: 100%;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--panel);
+}
+
+.lightbox__close {
+  position: absolute;
+  top: clamp(12px, 3vw, 24px);
+  right: clamp(12px, 3vw, 24px);
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  padding: 0;
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  background: var(--panel);
+  color: var(--text);
+  cursor: pointer;
+  transition: border-color 0.15s ease, color 0.15s ease;
+}
+.lightbox__close:hover { border-color: var(--pink); color: var(--pink-strong); }
+.lightbox__close svg { width: 20px; height: 20px; }
+
+/* 9. Media assets --------------------------------------------------------- */
+.asset-group + .asset-group { margin-top: clamp(32px, 4vw, 48px); }
+
+.asset-group__title {
+  margin: 0 0 1rem;
+  font-family: var(--font-pixel);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.asset-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+  gap: 14px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.asset-grid--compact { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); }
+
+.asset-card {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius-sm);
+  background: var(--panel);
+}
+
+.asset-card__preview {
+  display: grid;
+  place-items: center;
+  aspect-ratio: 16 / 9;
+  padding: 10px;
+  background: #16121d;
+  border-bottom: 1px solid var(--border-soft);
+}
+.asset-card--tall .asset-card__preview { aspect-ratio: 3 / 4; }
+.asset-card--square .asset-card__preview { aspect-ratio: 1 / 1; }
+
+.asset-card__preview img {
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  image-rendering: pixelated;
+}
+
+.asset-card__body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.2rem;
+  padding: 0.85rem 0.95rem 0.95rem;
+}
+/* Keeps the download buttons lined up when previews differ in height. */
+.asset-card__body .btn { margin-top: auto; }
+
+.asset-card__name {
+  margin: 0;
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.asset-card__meta {
+  margin: 0 0 0.6rem;
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  overflow-wrap: anywhere;
+}
+
+.assets__empty {
+  margin: 1rem 0 0;
+  padding: 1rem 1.1rem;
+  border: 1px dashed var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+.assets__empty code { color: var(--lcd-soft); }
+
+/* 10. Contact / social ---------------------------------------------------- */
+.social {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.social a {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--panel);
+  color: var(--text-muted);
+  transition: color 0.15s ease, border-color 0.15s ease, transform 0.15s ease;
+}
+.social a:hover {
+  color: var(--text);
+  border-color: var(--pink);
+  transform: translateY(-2px);
+}
+.social svg { width: 20px; height: 20px; fill: currentColor; }
+/* The email icon is drawn with strokes, so it must not be filled. */
+.social svg[fill="none"] { fill: none; }
+
+/* 11. Footer -------------------------------------------------------------- */
+.footer {
+  border-top: 1px solid var(--border-soft);
+  padding-block: 2rem;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
+.footer__inner {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0.5rem 1.5rem;
+}
+.footer p { margin: 0; }
+
+/* 12. Responsive ---------------------------------------------------------- */
+@media (min-width: 900px) {
+  .hero__decor--pet { display: block; }
+}
+
+/* Three columns keeps the six quick facts in two tidy rows. */
+@media (min-width: 760px) {
+  .facts { grid-template-columns: repeat(3, 1fr); }
+}
+
+@media (max-width: 640px) {
+  body { font-size: 16px; }
+
+  .hero__actions .btn { flex: 1 1 100%; }
+
+  .hero__decor--bg { width: 260px; opacity: 0.10; }
+
+  .shots { grid-template-columns: 1fr; }
+
+  .asset { align-items: flex-start; }
+  .asset .btn { width: 100%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+  }
+}

@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dejinochi Media Kit</title>
+<meta name="description" content="Media kit for Dejinochi, a retro-style virtual pet that lives on your desktop. Developed by hacktic. Windows, Q4 2026.">
+<meta name="color-scheme" content="dark">
+<link rel="stylesheet" href="styles.css">
+<!-- Optional favicon: replace with a supplied icon file, or delete this line. -->
+<link rel="icon" href="assets/LOGO_1.png">
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<!--
+  ==========================================================================
+  WHAT IS ALREADY FILLED IN
+  --------------------------------------------------------------------------
+  Steam store page        https://store.steampowered.com/app/5277000/Dejinochi/
+  YouTube                 https://www.youtube.com/@hackticdev
+  X / Twitter             https://x.com/_hacktic
+  Email                   hackticdev@outlook.com
+
+  Trailer                 https://www.youtube.com/watch?v=9hD8OuE7F8E
+                          (embedded in the Trailer section)
+
+  From the Steam store page (app 5277000), linked straight from Steam's CDN
+  and never copied into this repository:
+    - the seven screenshots in the Screenshots section and asset library
+
+  TikTok is hidden for now; see the Contact section to switch it back on.
+
+  Local files in the assets/ folder (see the Media assets section below):
+    assets/LOGO_1.png             logo, also used in the hero and as favicon
+    assets/vertical-capsule.png   key art, also shown in the hero
+    assets/background.png         background art, listed in the asset library
+    assets/background-decoration.png  optional faint hero decoration
+    assets/game.png               transparent shell device
+    assets/gameplay.gif           animated gameplay capture
+    assets/capsule.png            not supplied yet - card hides itself
+    assets/pet.gif                not supplied yet - card hides itself
+    assets/shell.png              not supplied yet - card hides itself
+  Any of these that are missing are removed automatically by script.js, so the
+  layout will not break while you are still gathering assets.
+  ==========================================================================
+-->
+
+<header class="hero" id="top">
+  <!-- Decorative only: safe to delete. Removed automatically if the file is missing. -->
+  <img class="hero__decor hero__decor--bg" src="assets/background-decoration.png" alt="" aria-hidden="true" data-optional>
+  <img class="hero__decor hero__decor--pet" src="assets/pet.gif" alt="" aria-hidden="true" data-optional>
+
+  <div class="wrap hero__inner">
+    <!--
+      Vertical capsule / key art, shown to the left of the game details.
+      Uses assets/vertical-capsule.png. If that file is missing the whole
+      column is dropped and the details sit on their own.
+    -->
+    <div class="hero__capsule" data-hero-capsule>
+      <img src="assets/vertical-capsule.png" alt="Dejinochi key art" data-optional>
+    </div>
+
+    <div class="hero__details">
+      <!-- Hero logo. If assets/LOGO_1.png is missing, the alt text is
+           rendered as a wordmark instead. -->
+      <h1 class="hero__logo">
+        <img src="assets/LOGO_1.png" alt="Dejinochi" data-optional data-fallback-text="Dejinochi">
+      </h1>
+
+      <p class="hero__pitch">A retro-style virtual pet that lives on your desktop.</p>
+
+      <ul class="hero__meta">
+        <li>Q4 2026</li>
+        <li>Windows</li>
+      </ul>
+
+      <div class="hero__actions">
+        <a class="btn btn--primary" href="https://store.steampowered.com/app/5277000/Dejinochi/" target="_blank" rel="noopener">View on Steam</a>
+        <!-- Scrolls down to the embedded trailer player. -->
+        <a class="btn btn--ghost" href="#trailer">Watch trailer</a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- ===================== Quick facts ===================== -->
+  <section class="section section--facts" id="facts" aria-labelledby="facts-title">
+    <div class="wrap">
+      <h2 class="visually-hidden" id="facts-title">Quick facts</h2>
+      <dl class="facts">
+        <div class="fact">
+          <dt>Developer</dt>
+          <dd>hacktic</dd>
+        </div>
+        <div class="fact">
+          <dt>Release</dt>
+          <dd>Q4 2026</dd>
+        </div>
+        <div class="fact">
+          <dt>Platform</dt>
+          <dd>Windows</dd>
+        </div>
+        <div class="fact">
+          <dt>Price</dt>
+          <dd>TBA</dd>
+        </div>
+        <div class="fact">
+          <dt>Genre</dt>
+          <dd>Desktop virtual pet / idle virtual pet</dd>
+        </div>
+        <div class="fact">
+          <dt>Languages</dt>
+          <dd>English, German, Japanese</dd>
+        </div>
+      </dl>
+    </div>
+  </section>
+
+  <!-- ===================== About ===================== -->
+  <section class="section" id="about" aria-labelledby="about-title">
+    <div class="wrap">
+      <p class="kicker">About</p>
+      <h2 class="section__title" id="about-title">Dejinochi</h2>
+      <p class="prose">Dejinochi is a retro-style virtual pet that lives on your desktop. Feed it, play with it, clean up after it and look after it when it gets sick. The way you care for your pet influences what it eventually grows into. When a pet reaches adulthood it can graduate and move on, but the pets you&rsquo;ve raised are remembered and may return to visit you later, sometimes bringing gifts with them.</p>
+    </div>
+  </section>
+
+  <!-- ===================== Key features ===================== -->
+  <section class="section" id="features" aria-labelledby="features-title">
+    <div class="wrap">
+      <p class="kicker">Key features</p>
+      <h2 class="section__title" id="features-title">What&rsquo;s in the game</h2>
+      <ul class="features">
+        <li>A virtual pet that lives alongside you on your Windows desktop.</li>
+        <li>Care-driven evolution: how you feed, treat and look after your pet influences what it grows into.</li>
+        <li>Pets eventually graduate, are remembered in your collection, and can return to visit.</li>
+        <li>Returning pets and normal play can reward you with gifts and unlockables.</li>
+        <li>Collect different shells and decorate them with collectible stickers.</li>
+        <li>Play small minigames with your pet.</li>
+        <li>Asynchronous multiplayer / pet visits through Steam.</li>
+        <li>Steam achievements.</li>
+        <li>Steam Cloud saves.</li>
+        <li>Steam Rich Presence integration.</li>
+        <li>Mod support.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ===================== Trailer ===================== -->
+  <section class="section" id="trailer" aria-labelledby="trailer-title">
+    <div class="wrap">
+      <p class="kicker">Trailer</p>
+      <h2 class="section__title" id="trailer-title">Watch the trailer</h2>
+
+      <!--
+        Trailer: "Trailer Dejinochi" on YouTube.
+        youtube-nocookie.com is YouTube's privacy-enhanced mode, and the browser
+        only fetches the player once this section is scrolled into view.
+        Replace the video id below if the trailer ever changes.
+      -->
+      <div class="trailer">
+        <iframe
+          src="https://www.youtube-nocookie.com/embed/9hD8OuE7F8E"
+          title="Trailer Dejinochi"
+          loading="lazy"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          referrerpolicy="strict-origin-when-cross-origin"
+          allowfullscreen></iframe>
+      </div>
+
+      <p class="trailer__note">
+        <a class="link" href="https://www.youtube.com/watch?v=9hD8OuE7F8E" target="_blank" rel="noopener">Open on YouTube</a>
+      </p>
+    </div>
+  </section>
+
+  <!-- ===================== Screenshots ===================== -->
+  <section class="section" id="screenshots" aria-labelledby="screenshots-title">
+    <div class="wrap">
+      <p class="kicker">Screenshots</p>
+      <h2 class="section__title" id="screenshots-title">Press screenshots</h2>
+
+      <!--
+        Screenshots are the Steam-hosted images (app 5277000), linked directly
+        and NOT copied into this repository.
+
+        Each figure uses two sizes of the same image:
+          .600x338.jpg    small version used in the grid
+          .1920x1080.jpg  full-size version opened in the lightbox
+        To swap one, replace both the <a href> and the <img src> below.
+      -->
+      <div class="shots">
+        <figure class="shot">
+          <a href="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/5277000/9f007143dc8e9e5ef512c29f7275c396ab0d1682/ss_9f007143dc8e9e5ef512c29f7275c396ab0d1682.1920x1080.jpg?t=1790077048" data-lightbox>
+            <img src="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/5277000/9f007143dc8e9e5ef512c29f7275c396ab0d1682/ss_9f007143dc8e9e5ef512c29f7275c396ab0d1682.600x338.jpg?t=1790077048" alt="Dejinochi screenshot 1" loading="lazy" width="600" height="338" data-shot="1">
+          </a>
+        </figure>
+        <figure class="shot">
+          <a href="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/5277000/6d090331c26f19ef3faf357d08056264b77fbad9/ss_6d090331c26f19ef3faf357d08056264b77fbad9.1920x1080.jpg?t=1790077048" data-lightbox>
+            <img src="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/5277000/6d090331c26f19ef3faf357d08056264b77fbad9/ss_6d090331c26f19ef3faf357d08056264b77fbad9.600x338.jpg?t=1790077048" alt="Dejinochi screenshot 2" loading="lazy" width="600" height="338" data-shot="2">
+          </a>
+        </figure>
+        <figure class="shot">
+          <a href="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/5277000/b8be200396b08d4cc1f6f5f1826ff902d24bbf24/ss_b8be200396b08d4cc1f6f5f1826ff902d24bbf24.1920x1080.jpg?t=1790077048" data-lightbox>
+            <img src="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/5277000/b8be200396b08d4cc1f6f5f1826ff902d24bbf24/ss_b8be200396b08d4cc1f6f5f1826ff902d24bbf24.600x338.jpg?t=1790077048" alt="Dejinochi screenshot 3" loading="lazy" width="600" height="338" data-shot="3">
+          </a>
+        </figure>
+        <figure class="shot">
+          <a href="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/5277000/92c7c1259833dddfb0ccb66c43bcf81b70bd0a71/ss_92c7c1259833dddfb0ccb66c43bcf81b70bd0a71.1920x1080.jpg?t=1790077048" data-lightbox>
+            <img src="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/5277000/92c7c1259833dddfb0ccb66c43bcf81b70bd0a71/ss_92c7c1259833dddfb0ccb66c43bcf81b70bd0a71.600x338.jpg?t=1790077048" alt="Dejinochi screenshot 4" loading="lazy" width="600" height="338" data-shot="4">
+          </a>
+        </figure>
+        <figure class="shot">
+          <a href="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/5277000/ba367070acfd0b61732c45e2d7b7027cbb4b5f37/ss_ba367070acfd0b61732c45e2d7b7027cbb4b5f37.1920x1080.jpg?t=1790077048" data-lightbox>
+            <img src="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/5277000/ba367070acfd0b61732c45e2d7b7027cbb4b5f37/ss_ba367070acfd0b61732c45e2d7b7027cbb4b5f37.600x338.jpg?t=1790077048" alt="Dejinochi screenshot 5" loading="lazy" width="600" height="338" data-shot="5">
+          </a>
+        </figure>
+        <figure class="shot">
+          <a href="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/5277000/271708dd27e728b138e32de8cfbe1b5308aa3a87/ss_271708dd27e728b138e32de8cfbe1b5308aa3a87.1920x1080.jpg?t=1790077048" data-lightbox>
+            <img src="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/5277000/271708dd27e728b138e32de8cfbe1b5308aa3a87/ss_271708dd27e728b138e32de8cfbe1b5308aa3a87.600x338.jpg?t=1790077048" alt="Dejinochi screenshot 6" loading="lazy" width="600" height="338" data-shot="6">
+          </a>
+        </figure>
+        <figure class="shot">
+          <a href="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/5277000/b6f4d7699cf772a6b657f67bbb3a97579b88d482/ss_b6f4d7699cf772a6b657f67bbb3a97579b88d482.1920x1080.jpg?t=1790077048" data-lightbox>
+            <img src="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/5277000/b6f4d7699cf772a6b657f67bbb3a97579b88d482/ss_b6f4d7699cf772a6b657f67bbb3a97579b88d482.600x338.jpg?t=1790077048" alt="Dejinochi screenshot 7" loading="lazy" width="600" height="338" data-shot="7">
+          </a>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== Media assets ===================== -->
+  <section class="section" id="assets" aria-labelledby="assets-title">
+    <div class="wrap">
+      <p class="kicker">Media assets</p>
+      <h2 class="section__title" id="assets-title">Asset library</h2>
+
+      <!--
+        Key art. Cards pointing at the local assets/ folder are removed
+        automatically when the file is not there yet, so only assets that
+        really exist are offered. The background is served by Steam, so it is
+        always shown.
+      -->
+      <div class="asset-group" data-asset-group>
+        <h3 class="asset-group__title">Key art</h3>
+        <ul class="asset-grid">
+          <li class="asset-card" data-asset="assets/LOGO_1.png">
+            <div class="asset-card__preview">
+              <img src="assets/LOGO_1.png" alt="Dejinochi logo" loading="lazy" data-optional>
+            </div>
+            <div class="asset-card__body">
+              <p class="asset-card__name">Logo</p>
+              <p class="asset-card__meta">assets/LOGO_1.png</p>
+              <a class="btn btn--small" href="assets/LOGO_1.png" download>Download</a>
+            </div>
+          </li>
+          <li class="asset-card asset-card--tall" data-asset="assets/vertical-capsule.png">
+            <div class="asset-card__preview">
+              <img src="assets/vertical-capsule.png" alt="Dejinochi vertical capsule" loading="lazy" data-optional>
+            </div>
+            <div class="asset-card__body">
+              <p class="asset-card__name">Vertical capsule</p>
+              <p class="asset-card__meta">assets/vertical-capsule.png</p>
+              <a class="btn btn--small" href="assets/vertical-capsule.png" download>Download</a>
+            </div>
+          </li>
+          <li class="asset-card" data-asset="assets/capsule.png">
+            <div class="asset-card__preview">
+              <img src="assets/capsule.png" alt="Dejinochi capsule" loading="lazy" data-optional>
+            </div>
+            <div class="asset-card__body">
+              <p class="asset-card__name">Capsule / key art</p>
+              <p class="asset-card__meta">assets/capsule.png</p>
+              <a class="btn btn--small" href="assets/capsule.png" download>Download</a>
+            </div>
+          </li>
+          <li class="asset-card" data-asset="assets/background.png">
+            <div class="asset-card__preview">
+              <img src="assets/background.png" alt="Dejinochi background artwork" loading="lazy" data-optional>
+            </div>
+            <div class="asset-card__body">
+              <p class="asset-card__name">Background</p>
+              <p class="asset-card__meta">assets/background.png</p>
+              <a class="btn btn--small" href="assets/background.png" download>Download</a>
+            </div>
+          </li>
+        </ul>
+        <p class="assets__empty" data-assets-empty hidden>The local files in this group have not been added to the <code>assets/</code> folder yet.</p>
+      </div>
+
+      <!-- Transparent in-game assets, supplied locally. -->
+      <div class="asset-group" data-asset-group>
+        <h3 class="asset-group__title">Game assets</h3>
+        <ul class="asset-grid">
+          <li class="asset-card asset-card--tall" data-asset="assets/game.png">
+            <div class="asset-card__preview">
+              <img src="assets/game.png" alt="Dejinochi shell device" loading="lazy" data-optional>
+            </div>
+            <div class="asset-card__body">
+              <p class="asset-card__name">Shell device</p>
+              <p class="asset-card__meta">assets/game.png</p>
+              <a class="btn btn--small" href="assets/game.png" download>Download</a>
+            </div>
+          </li>
+          <!-- Optional extras: drop these files in to make the cards appear. -->
+          <li class="asset-card asset-card--tall" data-asset="assets/pet.gif">
+            <div class="asset-card__preview">
+              <img src="assets/pet.gif" alt="Dejinochi pet animation" loading="lazy" data-optional>
+            </div>
+            <div class="asset-card__body">
+              <p class="asset-card__name">Pet animation</p>
+              <p class="asset-card__meta">assets/pet.gif</p>
+              <a class="btn btn--small" href="assets/pet.gif" download>Download</a>
+            </div>
+          </li>
+          <li class="asset-card asset-card--tall" data-asset="assets/shell.png">
+            <div class="asset-card__preview">
+              <img src="assets/shell.png" alt="Dejinochi shell" loading="lazy" data-optional>
+            </div>
+            <div class="asset-card__body">
+              <p class="asset-card__name">Shell</p>
+              <p class="asset-card__meta">assets/shell.png</p>
+              <a class="btn btn--small" href="assets/shell.png" download>Download</a>
+            </div>
+          </li>
+        </ul>
+        <p class="assets__empty" data-assets-empty hidden>The local files in this group have not been added to the <code>assets/</code> folder yet.</p>
+      </div>
+
+      <!--
+        Gameplay: the same Steam-hosted screenshots as the gallery above,
+        listed here with direct download links to the 1920x1080 originals.
+      -->
+      <div class="asset-group" data-asset-group>
+        <h3 class="asset-group__title">Gameplay</h3>
+        <ul class="asset-grid">
+          <li class="asset-card asset-card--square" data-asset="assets/gameplay.gif">
+            <div class="asset-card__preview">
+              <img src="assets/gameplay.gif" alt="Dejinochi gameplay animation" loading="lazy" data-optional>
+            </div>
+            <div class="asset-card__body">
+              <p class="asset-card__name">Gameplay animation</p>
+              <p class="asset-card__meta">assets/gameplay.gif</p>
+              <a class="btn btn--small" href="assets/gameplay.gif" download>Download</a>
+            </div>
+          </li>
+        </ul>
+
+        <ul class="asset-grid asset-grid--compact">
+          <li class="asset-card">
+            <div class="asset-card__preview">
+              <img src="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/5277000/9f007143dc8e9e5ef512c29f7275c396ab0d1682/ss_9f007143dc8e9e5ef512c29f7275c396ab0d1682.600x338.jpg?t=1790077048" alt="" loading="lazy">
+            </div>
+            <div class="asset-card__body">
+              <p class="asset-card__name">Screenshot 1</p>
+              <p class="asset-card__meta">1920 &times; 1080 JPG</p>
+              <a class="btn btn--small" href="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/5277000/9f007143dc8e9e5ef512c29f7275c396ab0d1682/ss_9f007143dc8e9e5ef512c29f7275c396ab0d1682.1920x1080.jpg?t=1790077048" target="_blank" rel="noopener">Open</a>
+            </div>
+          </li>
+          <li class="asset-card">
+            <div class="asset-card__preview">
+              <img src="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/5277000/6d090331c26f19ef3faf357d08056264b77fbad9/ss_6d090331c26f19ef3faf357d08056264b77fbad9.600x338.jpg?t=1790077048" alt="" loading="lazy">
+            </div>
+            <div class="asset-card__body">
+              <p class="asset-card__name">Screenshot 2</p>
+              <p class="asset-card__meta">1920 &times; 1080 JPG</p>
+              <a class="btn btn--small" href="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/5277000/6d090331c26f19ef3faf357d08056264b77fbad9/ss_6d090331c26f19ef3faf357d08056264b77fbad9.1920x1080.jpg?t=1790077048" target="_blank" rel="noopener">Open</a>
+            </div>
+          </li>
+          <li class="asset-card">
+            <div class="asset-card__preview">
+              <img src="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/5277000/b8be200396b08d4cc1f6f5f1826ff902d24bbf24/ss_b8be200396b08d4cc1f6f5f1826ff902d24bbf24.600x338.jpg?t=1790077048" alt="" loading="lazy">
+            </div>
+            <div class="asset-card__body">
+              <p class="asset-card__name">Screenshot 3</p>
+              <p class="asset-card__meta">1920 &times; 1080 JPG</p>
+              <a class="btn btn--small" href="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/5277000/b8be200396b08d4cc1f6f5f1826ff902d24bbf24/ss_b8be200396b08d4cc1f6f5f1826ff902d24bbf24.1920x1080.jpg?t=1790077048" target="_blank" rel="noopener">Open</a>
+            </div>
+          </li>
+          <li class="asset-card">
+            <div class="asset-card__preview">
+              <img src="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/5277000/92c7c1259833dddfb0ccb66c43bcf81b70bd0a71/ss_92c7c1259833dddfb0ccb66c43bcf81b70bd0a71.600x338.jpg?t=1790077048" alt="" loading="lazy">
+            </div>
+            <div class="asset-card__body">
+              <p class="asset-card__name">Screenshot 4</p>
+              <p class="asset-card__meta">1920 &times; 1080 JPG</p>
+              <a class="btn btn--small" href="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/5277000/92c7c1259833dddfb0ccb66c43bcf81b70bd0a71/ss_92c7c1259833dddfb0ccb66c43bcf81b70bd0a71.1920x1080.jpg?t=1790077048" target="_blank" rel="noopener">Open</a>
+            </div>
+          </li>
+          <li class="asset-card">
+            <div class="asset-card__preview">
+              <img src="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/5277000/ba367070acfd0b61732c45e2d7b7027cbb4b5f37/ss_ba367070acfd0b61732c45e2d7b7027cbb4b5f37.600x338.jpg?t=1790077048" alt="" loading="lazy">
+            </div>
+            <div class="asset-card__body">
+              <p class="asset-card__name">Screenshot 5</p>
+              <p class="asset-card__meta">1920 &times; 1080 JPG</p>
+              <a class="btn btn--small" href="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/5277000/ba367070acfd0b61732c45e2d7b7027cbb4b5f37/ss_ba367070acfd0b61732c45e2d7b7027cbb4b5f37.1920x1080.jpg?t=1790077048" target="_blank" rel="noopener">Open</a>
+            </div>
+          </li>
+          <li class="asset-card">
+            <div class="asset-card__preview">
+              <img src="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/5277000/271708dd27e728b138e32de8cfbe1b5308aa3a87/ss_271708dd27e728b138e32de8cfbe1b5308aa3a87.600x338.jpg?t=1790077048" alt="" loading="lazy">
+            </div>
+            <div class="asset-card__body">
+              <p class="asset-card__name">Screenshot 6</p>
+              <p class="asset-card__meta">1920 &times; 1080 JPG</p>
+              <a class="btn btn--small" href="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/5277000/271708dd27e728b138e32de8cfbe1b5308aa3a87/ss_271708dd27e728b138e32de8cfbe1b5308aa3a87.1920x1080.jpg?t=1790077048" target="_blank" rel="noopener">Open</a>
+            </div>
+          </li>
+          <li class="asset-card">
+            <div class="asset-card__preview">
+              <img src="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/5277000/b6f4d7699cf772a6b657f67bbb3a97579b88d482/ss_b6f4d7699cf772a6b657f67bbb3a97579b88d482.600x338.jpg?t=1790077048" alt="" loading="lazy">
+            </div>
+            <div class="asset-card__body">
+              <p class="asset-card__name">Screenshot 7</p>
+              <p class="asset-card__meta">1920 &times; 1080 JPG</p>
+              <a class="btn btn--small" href="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/5277000/b6f4d7699cf772a6b657f67bbb3a97579b88d482/ss_b6f4d7699cf772a6b657f67bbb3a97579b88d482.1920x1080.jpg?t=1790077048" target="_blank" rel="noopener">Open</a>
+            </div>
+          </li>
+        </ul>
+        <p class="assets__empty" data-assets-empty hidden>The local files in this group have not been added to the <code>assets/</code> folder yet.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== Contact ===================== -->
+  <section class="section" id="contact" aria-labelledby="contact-title">
+    <div class="wrap">
+      <p class="kicker">Contact</p>
+      <h2 class="section__title" id="contact-title">Press &amp; creator enquiries</h2>
+      <p class="prose prose--tight">
+        <a class="link" href="mailto:hackticdev@outlook.com">hackticdev@outlook.com</a>
+      </p>
+
+      <ul class="social">
+        <li>
+          <a href="https://store.steampowered.com/app/5277000/Dejinochi/" target="_blank" rel="noopener" aria-label="Dejinochi on Steam">
+            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M11.979 0C5.678 0 .511 4.86.022 11.037l6.432 2.658c.545-.371 1.203-.59 1.912-.59.063 0 .125.004.188.006l2.861-4.142V8.91c0-2.495 2.028-4.524 4.524-4.524 2.494 0 4.524 2.031 4.524 4.527s-2.03 4.525-4.524 4.525h-.105l-4.076 2.911c0 .052.004.105.004.159 0 1.875-1.515 3.396-3.39 3.396-1.635 0-3.016-1.173-3.331-2.727L.436 15.27C1.862 20.307 6.486 24 11.979 24c6.627 0 11.999-5.373 11.999-12S18.605 0 11.979 0zM7.54 18.21l-1.473-.61c.262.543.714.999 1.314 1.25 1.297.539 2.793-.076 3.332-1.375.263-.63.264-1.319.005-1.949s-.75-1.121-1.377-1.383c-.624-.26-1.29-.249-1.878-.03l1.523.63c.956.4 1.409 1.5 1.009 2.455-.397.957-1.497 1.41-2.454 1.012H7.54zm11.415-9.303c0-1.662-1.353-3.015-3.015-3.015-1.665 0-3.015 1.353-3.015 3.015 0 1.665 1.35 3.015 3.015 3.015 1.663 0 3.015-1.35 3.015-3.015zm-5.273-.005c0-1.252 1.013-2.266 2.265-2.266 1.249 0 2.266 1.014 2.266 2.266 0 1.251-1.017 2.265-2.266 2.265-1.253 0-2.265-1.014-2.265-2.265z"/></svg>
+          </a>
+        </li>
+        <li>
+          <a href="https://www.youtube.com/@hackticdev" target="_blank" rel="noopener" aria-label="hacktic on YouTube">
+            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+          </a>
+        </li>
+        <!--
+          TikTok is hidden for now. To bring it back, uncomment the <li> below
+          and replace TIKTOK_URL with the profile link.
+        <li>
+          <a href="TIKTOK_URL" target="_blank" rel="noopener" aria-label="hacktic on TikTok">
+            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg>
+          </a>
+        </li>
+        -->
+        <li>
+          <a href="https://x.com/_hacktic" target="_blank" rel="noopener" aria-label="hacktic on X (Twitter)">
+            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z"/></svg>
+          </a>
+        </li>
+        <li>
+          <a href="mailto:hackticdev@outlook.com" aria-label="Email hacktic">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="2.75" y="5.25" width="18.5" height="13.5" rx="2.5"/><path d="m3.9 7.4 6.9 4.9a2 2 0 0 0 2.4 0l6.9-4.9"/></svg>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <div class="wrap footer__inner">
+    <p>Dejinochi media kit</p>
+    <p><a class="link" href="mailto:hackticdev@outlook.com">hackticdev@outlook.com</a></p>
+  </div>
+</footer>
+
+<!-- Lightbox: used by the screenshot gallery. -->
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Screenshot viewer" hidden>
+  <button type="button" class="lightbox__close" aria-label="Close screenshot viewer">
+    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+  </button>
+  <img class="lightbox__img" src="" alt="">
+</div>
+
+<script src="script.js" defer></script>
+</body>
+</html>

@@ -61,6 +61,8 @@
         <a href="#canvas">Canvas &amp; rendering</a>
         <a href="#input">Input</a>
         <a href="#minigames">Minigames</a>
+        <a href="#items">Items &amp; toys</a>
+        <a href="#unlocks">Mod-owned unlocks</a>
         <a href="#events">Events</a>
         <a href="#pet-api">Pet &amp; game services</a>
         <a href="#storage">Persistent storage</a>
@@ -72,12 +74,14 @@
       <div class="docs__nav-group">
         <p class="docs__nav-title">Guides</p>
         <a href="#pocket-garden">Pocket Garden</a>
+        <a href="#toybox">Toybox Workshop</a>
         <a href="#security">Security model</a>
         <a href="#testing">Testing &amp; debugging</a>
       </div>
 
       <div class="docs__nav-group">
         <p class="docs__nav-title">Shipping</p>
+        <a href="#mod-creator">Mod Creator</a>
         <a href="#publishing">Steam Workshop</a>
         <a href="#versioning">API versioning</a>
         <a href="#troubleshooting">Troubleshooting</a>
@@ -351,6 +355,8 @@ end</code></pre>
               <tr><td><code>storage</code></td><td><code>api.storage_get</code>, <code>storage_set</code>, <code>storage_save</code>, <code>set_schema</code>, <code>on_migrate</code>.</td></tr>
               <tr><td><code>notify</code></td><td><code>api.notify(...)</code> on the normal feedback caption.</td></tr>
               <tr><td><code>content</code></td><td>Read-only catalogue queries.</td></tr>
+              <tr><td><code>content.unlock</code></td><td>Mod-owned shell/sticker unlock providers, owned-content unlock/lock and owned sticker grants.</td></tr>
+              <tr><td><code>items</code></td><td>Register mod-owned items, give/take them, read counts and supply custom Items-menu use logic.</td></tr>
             </tbody>
           </table>
         </div>
@@ -377,6 +383,12 @@ end</code></pre>
           definition; reusing an asset key replaces that value. Modded collectible
           species and stickers appear in collections but never increase the
           base-game achievement totals.
+        </p>
+        <p>
+          A shell may declare <code>"unlock": {"type": "custom", "hint": "..."}</code>
+          and a sticker may declare <code>"distribution": "custom"</code>. Those
+          fields let a code mod provide its own unlock condition or acquisition
+          method without changing official progression.
         </p>
         <p>
           See the game repository&rsquo;s <code>content/README.md</code> for the
@@ -628,6 +640,8 @@ end</code></pre>
               <tr><td>Registration</td><td><code>register_screen</code>, <code>register_menu_entry</code>, <code>register_minigame</code></td><td><code>ui</code>, <code>minigames</code></td></tr>
               <tr><td>Events</td><td><code>subscribe</code>, <code>on</code>, <code>register_update</code></td><td><code>events</code></td></tr>
               <tr><td>Host services</td><td><code>pet</code>, <code>game_time</code>, <code>apply_effect</code>, <code>notify</code>, <code>open_screen</code>, <code>sfx</code></td><td><code>pet.read</code>, <code>pet.modify</code>, <code>notify</code>, <code>ui</code></td></tr>
+              <tr><td>Items</td><td><code>register_item</code>, <code>give_item</code>, <code>take_item</code>, <code>item_count</code></td><td><code>items</code></td></tr>
+              <tr><td>Owned unlocks</td><td><code>register_unlockable</code>, <code>unlock_content</code>, <code>give_sticker</code></td><td><code>content.unlock</code></td></tr>
               <tr><td>Persistence</td><td><code>storage_get</code>, <code>storage_set</code>, <code>on_migrate</code></td><td><code>storage</code></td></tr>
               <tr><td>Content</td><td><code>content_list</code>, <code>content_info</code></td><td><code>content</code></td></tr>
               <tr><td>Utility</td><td><code>now</code>, <code>log</code>, <code>mod_id</code>, <code>api_version</code>, <code>has_capability</code></td><td>&mdash;</td></tr>
@@ -918,6 +932,122 @@ end
 function status_bugs()
     return "Catch three bugs!"
 end</code></pre>
+      </section>
+
+      <!-- ================================================================ -->
+      <section class="doc-section" id="items">
+        <h2>Items &amp; toys</h2>
+        <p>
+          Code mods can register items that appear in the ordinary
+          <strong>Collections &rarr; Items</strong> menu once owned. The host owns
+          persistent counts, gift integration and the menu entry; the mod owns the
+          item&rsquo;s use logic.
+        </p>
+        <pre><code>var ball = ""
+
+function on_init()
+    ball = api.register_item({
+        "id": "ball",
+        "title": "Bouncy Ball",
+        "description": "Use it from Items.",
+        "giftable": true,
+        "on_use": use_ball
+    })
+end
+
+function use_ball()
+    if not api.take_item(ball, 1):
+        return
+    end
+    api.apply_effect("happiness", 4, "toy_ball")
+    api.notify("The pet bounced the ball!")
+end</code></pre>
+        <ul>
+          <li><code>giftable</code> items may enter the normal item-gift flow. Others are custom-only and must be granted by the mod.</li>
+          <li>Selecting an owned item invokes <code>on_use</code>. It may apply effects or call <code>api.open_screen</code> for a richer item screen.</li>
+          <li>Registered item ids are prefixed with the mod id, for example <code>mod:author.my_mod:item:ball</code>.</li>
+          <li>Counts persist in the normal Items save section. Unknown mod item ids are retained while the mod is disabled or missing.</li>
+          <li>Base items keep their existing behaviour; mods cannot replace the hourglass or graduation cap.</li>
+        </ul>
+        <div class="table-wrap">
+          <table class="api-table">
+            <thead><tr><th>Call</th><th>Meaning</th></tr></thead>
+            <tbody>
+              <tr><td><code>api.register_item(spec)</code></td><td>Register an item and return its full id.</td></tr>
+              <tr><td><code>api.give_item(id, amount?)</code></td><td>Add owned copies.</td></tr>
+              <tr><td><code>api.take_item(id, amount?)</code></td><td>Consume copies; false when insufficient.</td></tr>
+              <tr><td><code>api.item_count(id)</code></td><td>Read the owned count.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- ================================================================ -->
+      <section class="doc-section" id="unlocks">
+        <h2>Mod-owned unlocks</h2>
+        <p>
+          Mods may gate their own shells and stickers without touching official
+          achievements, Steam statistics or base-game progression. Ownership is
+          checked on the host side: a mod can only unlock content that belongs to
+          its own package.
+        </p>
+
+        <h3>Custom shell conditions</h3>
+        <pre><code>{
+  "id": "author.shell.moon",
+  "path": "shells/moon.png",
+  "unlock": {
+    "type": "custom",
+    "hint": "Buy two toys in the Toy Shop"
+  }
+}</code></pre>
+        <pre><code>function on_init()
+    api.register_unlockable({
+        "kind": "shell",
+        "id": "author.shell.moon",
+        "hint": "Buy two toys in the Toy Shop",
+        "is_unlocked": moon_ready
+    })
+end
+
+function moon_ready()
+    return api.storage_get("purchases", 0) >= 2
+end
+
+function grant_moon_shell()
+    # Call this when the condition is met to use the normal unlock/reveal path.
+    api.unlock_content("shell", "author.shell.moon")
+end</code></pre>
+        <p>
+          Mod shells without <code>unlock</code> metadata remain always available
+          for compatibility. Base shells never use mod unlock providers.
+        </p>
+
+        <h3>Custom sticker acquisition</h3>
+        <p>
+          Add <code>"distribution": "custom"</code> to a sticker definition to
+          remove it from normal gift rolls. The mod can then award it through a
+          shop, quest or event:
+        </p>
+        <pre><code>api.give_sticker("author.sticker.robot", 1)</code></pre>
+        <p>
+          The sticker still uses the ordinary Sticker Book inventory, placement,
+          save, and rendering flow. Omit <code>distribution</code> for the normal
+          gift pool.
+        </p>
+
+        <div class="table-wrap">
+          <table class="api-table">
+            <thead><tr><th>Call</th><th>Meaning</th></tr></thead>
+            <tbody>
+              <tr><td><code>api.register_unlockable(spec)</code></td><td>Register a shell/sticker predicate and hint.</td></tr>
+              <tr><td><code>api.unlock_content(kind, id, amount?)</code></td><td>Unlock owned content through normal state.</td></tr>
+              <tr><td><code>api.set_content_unlocked(kind, id, bool)</code></td><td>Explicitly unlock or lock owned content.</td></tr>
+              <tr><td><code>api.is_content_unlocked(kind, id)</code></td><td>Read the mod-owned state.</td></tr>
+              <tr><td><code>api.give_sticker(id, amount?)</code></td><td>Grant owned sticker copies.</td></tr>
+            </tbody>
+          </table>
+        </div>
       </section>
 
       <!-- ================================================================ -->
@@ -1226,6 +1356,31 @@ end</code></pre>
       </section>
 
       <!-- ================================================================ -->
+      <section class="doc-section" id="toybox">
+        <h2>Toybox Workshop: items, shops and owned unlocks</h2>
+        <p>
+          <code>example_mods/toybox_workshop/</code> is a second complete example
+          focused on the mod-owned content APIs. It adds a Toy Shop, earns coins
+          from ordinary minigames, sells three toys with counts, gives a
+          custom-only sticker on the first purchase, and unlocks a custom shell
+          after two purchases.
+        </p>
+        <ul>
+          <li>Toy items are registered by the mod and appear in Collections &rarr; Items.</li>
+          <li>The Bouncy Ball is giftable through the normal item-gift pool.</li>
+          <li>The Rubber Duck and Tiny Rocket are custom-only shop items.</li>
+          <li>Using a toy from the Items menu runs its <code>on_use</code> callback, consumes one copy, and applies validated pet effects.</li>
+          <li>The patchwork shell uses a custom unlock provider and hint.</li>
+          <li>The robot sticker uses <code>"distribution": "custom"</code>, so normal gifts cannot award it.</li>
+        </ul>
+        <p>
+          Open the folder as a project in the Mod Creator, or copy it into the
+          mods directory and enable it. It is a useful template for currency,
+          shops, consumables, custom unlock rules and custom-only rewards.
+        </p>
+      </section>
+
+      <!-- ================================================================ -->
       <section class="doc-section" id="security">
         <h2>Security model</h2>
         <p>
@@ -1279,6 +1434,29 @@ end</code></pre>
           <li>Does saved state disappear? Confirm <code>storage_set</code> succeeds and the dataset is within limits.</li>
           <li>Did a Workshop update change the script? Restart to load the new code.</li>
         </ul>
+      </section>
+
+      <!-- ================================================================ -->
+      <section class="doc-section" id="mod-creator">
+        <h2>Packaging with the Mod Creator</h2>
+        <p>
+          The Mod Creator is not a full IDE. Use your own text editor for
+          <code>.sgd</code> files, then package and validate the folder with the
+          creator.
+        </p>
+        <ol>
+          <li>Set <strong>Mod type</strong> to <strong>Code mod (DejiScript)</strong> in the Manifest tab.</li>
+          <li>Enter a namespaced Mod ID, entry path, API version and minimum game version.</li>
+          <li>Tick the capabilities the script uses and add dependencies.</li>
+          <li>Use <strong>Create code template</strong> in the Files tab, or <strong>Add file</strong> for your own scripts and assets.</li>
+          <li>Use <strong>Validate package</strong>, then <strong>Export folder</strong> for the Workshop uploader or <strong>Export mod ZIP</strong> for manual installation.</li>
+        </ol>
+        <p>
+          Shell entries can be marked <strong>Custom code unlock</strong> and
+          stickers can use <strong>Custom mod only</strong> distribution. Both
+          still require the code mod to register the matching provider or grant
+          the reward.
+        </p>
       </section>
 
       <!-- ================================================================ -->
@@ -1421,6 +1599,18 @@ end</code></pre>
             <strong>Images</strong>
             <code>api.load_image("assets/pic.png")</code><br>
             <code>ctx.sprite(id, x, y, scale)</code>
+          </div>
+          <div class="cheat-item">
+            <strong>Items</strong>
+            <code>api.register_item({...})</code><br>
+            <code>api.give_item(id, count)</code><br>
+            <code>api.take_item(id, count)</code>
+          </div>
+          <div class="cheat-item">
+            <strong>Owned unlocks</strong>
+            <code>api.register_unlockable({...})</code><br>
+            <code>api.unlock_content("shell", id)</code><br>
+            <code>api.give_sticker(id, 1)</code>
           </div>
         </div>
 

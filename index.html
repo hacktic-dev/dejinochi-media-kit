@@ -144,8 +144,51 @@
         <li>Steam achievements.</li>
         <li>Steam Cloud saves.</li>
         <li>Steam Rich Presence integration.</li>
-        <li>Mod support.</li>
+        <li><a class="link" href="mods.html">Mod support</a>, including sandboxed code mods.</li>
       </ul>
+    </div>
+  </section>
+
+  <!-- ===================== Mods ===================== -->
+  <section class="section" id="mods" aria-labelledby="mods-title">
+    <div class="wrap">
+      <p class="kicker">Mods</p>
+      <h2 class="section__title" id="mods-title">Make Dejinochi yours</h2>
+      <p class="prose">
+        Add new pets, shells, stickers and pixel art with data-only mods, or write
+        self-contained gameplay features with sandboxed DejiScript. Code mods can
+        register screens, menu entries, minigames, event reactions, timers and
+        their own persistent state without touching the game&rsquo;s source.
+      </p>
+
+      <div class="mod-grid">
+        <article class="mod-card">
+          <p class="mod-card__tag">Data mods</p>
+          <h3>Content packs</h3>
+          <p>
+            Ship JSON definitions and images for pets, shells, stickers and
+            assets. Data mods use the same merge rules as the base game and work
+            with the existing Mods screen and Steam Workshop flow.
+          </p>
+          <a class="link" href="mods.html#data-mods">Data mod overview</a>
+        </article>
+
+        <article class="mod-card mod-card--code">
+          <p class="mod-card__tag">Code mods</p>
+          <h3>DejiScript features</h3>
+          <p>
+            Build custom screens, simulations, minigames and event-driven
+            mechanics in DejiScript, a small GDScript-like language with explicit
+            capabilities, execution budgets and namespaced storage.
+          </p>
+          <a class="link" href="mods.html#dejiscript">Read the DejiScript reference</a>
+        </article>
+      </div>
+
+      <div class="section__actions">
+        <a class="btn btn--primary" href="mods.html">Read the modding guide</a>
+        <a class="btn btn--ghost" href="mods.html#quick-start">Make your first code mod</a>
+      </div>
     </div>
   </section>
 
@@ -474,7 +517,11 @@
 <footer class="footer">
   <div class="wrap footer__inner">
     <p>Dejinochi media kit</p>
-    <p><a class="link" href="mailto:hackticdev@outlook.com">hackticdev@outlook.com</a></p>
+    <p>
+      <a class="link" href="mods.html">Modding guide</a>
+      &middot;
+      <a class="link" href="mailto:hackticdev@outlook.com">hackticdev@outlook.com</a>
+    </p>
   </div>
 </footer>
 
